@@ -7,7 +7,7 @@ The example uses existing vpc and subnet configurations and creates an elastic I
 ## Usage
 Create an env.tfvars file and fill in your AWS configuration profile, region, vpc, subnet ids, database username, database password and vpc cidr block and db subnet group name. <br/>
 
-DB subnet group can be created via the RDS console and should consist of private subnets.
+DB subnet group can be created via the RDS console and should consist of private subnets. Private subnets should not contain be associated with a route table which links to the Internet Gateway.
 
 ```
 aws_profile = ""
