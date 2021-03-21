@@ -51,3 +51,28 @@ resource "aws_eip" "ec2_instance1_eip" {
   instance = aws_instance.ec2_instance1.id
   vpc      = true
 }
+
+resource "aws_security_group" "db_instance1_sg" {
+  name        = "db_instance1_sg"
+  description = "Security Group for db_instance1"
+  vpc_id      = var.vpc_id
+
+  ingress {
+    description = "DB"
+    from_port   = 5432
+    to_port     = 5432
+    protocol    = "tcp"
+    cidr_blocks = [var.vpc_cidr_block]
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = [var.vpc_cidr_block]
+  }
+
+  tags = {
+    Name = "db_instance1_sg"
+  }
+}
